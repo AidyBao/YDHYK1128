@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HItemSelectTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC5-lc-F0x">
+                        <rect key="frame" x="15" y="0.0" width="284" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h_report_checkItem" translatesAutoresizingMaskIntoConstraints="NO" id="Mov-kT-Kdp">
+                        <rect key="frame" x="299" y="16" width="13" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="13" id="K6G-ix-cwu"/>
+                            <constraint firstAttribute="height" constant="10" id="YSL-6p-dPh"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zC5-lc-F0x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VeY-gN-Ohf"/>
+                    <constraint firstAttribute="trailing" secondItem="Mov-kT-Kdp" secondAttribute="trailing" constant="8" id="ZvH-Np-J2j"/>
+                    <constraint firstItem="zC5-lc-F0x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aXQ-eh-35f"/>
+                    <constraint firstItem="Mov-kT-Kdp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hRH-Rg-yag"/>
+                    <constraint firstAttribute="bottom" secondItem="zC5-lc-F0x" secondAttribute="bottom" id="n62-mO-2Io"/>
+                    <constraint firstItem="Mov-kT-Kdp" firstAttribute="leading" secondItem="zC5-lc-F0x" secondAttribute="trailing" id="qIB-W2-zTw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgCheck" destination="Mov-kT-Kdp" id="TaU-jE-hmP"/>
+                <outlet property="lbItemName" destination="zC5-lc-F0x" id="njR-aq-hgs"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="h_report_checkItem" width="13" height="10"/>
+    </resources>
+</document>

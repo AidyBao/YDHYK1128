@@ -1,0 +1,157 @@
+//
+//  ZXCartButton.swift
+//  YDHYK
+//
+//  Created by screson on 2017/10/20.
+//  Copyright © 2017年 screson. All rights reserved.
+//
+
+import UIKit
+
+protocol ZXCartButtonDelegate: class {
+    func zxCartButtonTapped()
+}
+
+class ZXCartButton: UIWindow {
+    
+    static let buttonWidth:CGFloat = 60
+    
+    weak var delegate: ZXCartButtonDelegate?
+    
+    var cartImage:UIImageView!
+    var dotNum: UILabel!
+    func show() {
+        self.makeKeyAndVisible()
+    }
+    
+    func hide() {
+        self.resignKey()
+        self.isHidden = true
+    }
+    
+    func setCartNum(num: Int)  {
+        if num > 0 {
+            self.dotNum.isHidden = false
+            if num > 99 {
+                self.dotNum.text = "99+"
+            } else {
+                self.dotNum.text = "\(num)"
+            }
+        } else {
+            self.dotNum.text = ""
+            self.dotNum.isHidden = true
+        }
+    }
+    
+    convenience init() {
+        self.init(frame: CGRect(x: 10, y: ZX.BOUNDS_HEIGHT - ZXCartButton.buttonWidth * 2, width: ZXCartButton.buttonWidth, height: ZXCartButton.buttonWidth))
+        //self.windowLevel = 3000
+        self.rootViewController = UIViewController()
+        cartImage = UIImageView.init(frame: CGRect(x: 0, y: 0, width: ZXCartButton.buttonWidth, height: ZXCartButton.buttonWidth))
+        cartImage.contentMode = .scaleAspectFit
+        cartImage.image = #imageLiteral(resourceName: "zx-cartIcon")
+        self.addSubview(cartImage)
+        
+        dotNum = UILabel.init(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        dotNum.center = CGPoint(x: ZXCartButton.buttonWidth - 5, y: 5)
+        dotNum.layer.cornerRadius = 12
+        dotNum.layer.masksToBounds = true
+        dotNum.backgroundColor = UIColor.zx_customB()
+        dotNum.font = UIFont.zx_titleFont(withSize: 12)
+        dotNum.textColor = .white
+        dotNum.textAlignment = .center
+        dotNum.text = ""
+        dotNum.isHidden = true
+        self.addSubview(dotNum)
+        
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(jumpAction))
+        self.addGestureRecognizer(tapGesture)
+        
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handlePanGesture(gesture:)))
+        self.addGestureRecognizer(panGesture)
+        
+    }
+    
+    func jumpAction() {
+        delegate?.zxCartButtonTapped()
+    }
+    
+    func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        let window = ZXRootViewControllers.window()
+        switch gesture.state {
+        case .changed:
+            let translation = gesture.translation(in: window)
+            if let view = gesture.view {
+                view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+            }
+        case .ended:
+            if let view = gesture.view {
+                var stopPoint = CGPoint(x: 0, y: ZX.BOUNDS_HEIGHT / 2.0)
+                if (view.center.x < ZX.BOUNDS_WIDTH / 2.0) {
+                    if (view.center.y <= ZX.BOUNDS_HEIGHT/2.0) {
+                        //左上
+                        if (view.center.x  >= view.center.y) {
+                            stopPoint = CGPoint(x: view.center.x,y: ZXCartButton.buttonWidth/2.0)
+                        }else{
+                            stopPoint = CGPoint(x: ZXCartButton.buttonWidth/2.0,y: view.center.y)
+                        }
+                    }else{
+                        //左下
+                        if (view.center.x  >= ZX.BOUNDS_HEIGHT - view.center.y) {
+                            stopPoint = CGPoint(x: view.center.x,y: ZX.BOUNDS_HEIGHT - ZXCartButton.buttonWidth/2.0)
+                        }else{
+                            stopPoint = CGPoint(x: ZXCartButton.buttonWidth/2.0,y: view.center.y)
+                        }
+                    }
+                }else{
+                    if (view.center.y <= ZX.BOUNDS_HEIGHT/2.0) {
+                        //右上
+                        if (ZX.BOUNDS_WIDTH - view.center.x  >= view.center.y) {
+                            stopPoint = CGPoint(x: view.center.x,y: ZXCartButton.buttonWidth/2.0)
+                        }else{
+                            stopPoint = CGPoint(x: ZX.BOUNDS_WIDTH - ZXCartButton.buttonWidth/2.0,y: view.center.y)
+                        }
+                    }else{
+                        //右下
+                        if (ZX.BOUNDS_WIDTH - view.center.x  >= ZX.BOUNDS_HEIGHT - view.center.y) {
+                            stopPoint = CGPoint(x: view.center.x,y: ZX.BOUNDS_HEIGHT - ZXCartButton.buttonWidth/2.0)
+                        }else{
+                            stopPoint = CGPoint(x: ZX.BOUNDS_WIDTH - ZXCartButton.buttonWidth/2.0,y:view.center.y)
+                        }
+                    }
+                }
+                
+                if (stopPoint.x - ZXCartButton.buttonWidth/2.0 <= 0) {
+                    stopPoint = CGPoint(x: ZXCartButton.buttonWidth/2.0,y: stopPoint.y)
+                }
+                
+                if (stopPoint.x + ZXCartButton.buttonWidth/2.0 >= ZX.BOUNDS_WIDTH) {
+                    stopPoint = CGPoint(x: ZX.BOUNDS_WIDTH - ZXCartButton.buttonWidth/2.0,y: stopPoint.y)
+                }
+                
+                if (stopPoint.y - ZXCartButton.buttonWidth/2.0 <= 0) {
+                    stopPoint = CGPoint(x: stopPoint.x,y: ZXCartButton.buttonWidth/2.0)
+                }
+                
+                if (stopPoint.y + ZXCartButton.buttonWidth/2.0 >= ZX.BOUNDS_HEIGHT) {
+                    stopPoint = CGPoint(x: stopPoint.x, y: ZX.BOUNDS_HEIGHT - ZXCartButton.buttonWidth/2.0)
+                }
+                UIView.animate(withDuration: 0.5, animations: {
+                    view.center = stopPoint
+                })
+            }
+            
+        default:
+            break
+        }
+        gesture.setTranslation(CGPoint.zero, in: window)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

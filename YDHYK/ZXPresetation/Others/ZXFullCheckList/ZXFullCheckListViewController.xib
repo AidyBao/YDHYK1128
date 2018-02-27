@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZXFullCheckListViewController">
+            <connections>
+                <outlet property="checkListHeight" destination="Oh8-1s-fPJ" id="qjs-gP-ay5"/>
+                <outlet property="lbTitle" destination="b32-LL-EZx" id="RqL-3E-ayr"/>
+                <outlet property="maskView" destination="p0u-XU-VkL" id="VIx-bP-5zK"/>
+                <outlet property="tblCheckList" destination="Fhj-LF-KMO" id="0r0-qh-UAI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-XU-VkL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
+                    <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKK-eM-4Sb">
+                    <rect key="frame" x="0.0" y="547" width="375" height="120"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b32-LL-EZx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="SuR-zH-HDp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fhj-LF-KMO">
+                            <rect key="frame" x="0.0" y="40" width="375" height="80"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Oyj-A8-SxE"/>
+                                <outlet property="delegate" destination="-1" id="QfQ-Z4-4Wo"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Fhj-LF-KMO" secondAttribute="bottom" id="6H2-lI-DM4"/>
+                        <constraint firstItem="Fhj-LF-KMO" firstAttribute="leading" secondItem="xKK-eM-4Sb" secondAttribute="leading" id="7Ab-Q3-vsU"/>
+                        <constraint firstItem="b32-LL-EZx" firstAttribute="top" secondItem="xKK-eM-4Sb" secondAttribute="top" id="Kh1-nH-k72"/>
+                        <constraint firstAttribute="trailing" secondItem="b32-LL-EZx" secondAttribute="trailing" id="MS5-kA-Yoz"/>
+                        <constraint firstAttribute="height" constant="120" id="Oh8-1s-fPJ"/>
+                        <constraint firstAttribute="trailing" secondItem="Fhj-LF-KMO" secondAttribute="trailing" id="eWA-gN-1hy"/>
+                        <constraint firstItem="Fhj-LF-KMO" firstAttribute="top" secondItem="b32-LL-EZx" secondAttribute="bottom" id="iYV-jQ-WmC"/>
+                        <constraint firstItem="b32-LL-EZx" firstAttribute="leading" secondItem="xKK-eM-4Sb" secondAttribute="leading" id="qJe-XI-WSK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xKK-eM-4Sb" secondAttribute="trailing" id="2Bq-l6-vuP"/>
+                <constraint firstItem="p0u-XU-VkL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Fkg-VB-hqX"/>
+                <constraint firstItem="p0u-XU-VkL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YrC-qk-fJQ"/>
+                <constraint firstItem="xKK-eM-4Sb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eEL-VA-pft"/>
+                <constraint firstAttribute="bottom" secondItem="xKK-eM-4Sb" secondAttribute="bottom" id="jKn-hC-pjf"/>
+                <constraint firstAttribute="trailing" secondItem="p0u-XU-VkL" secondAttribute="trailing" id="qPA-UC-MI8"/>
+                <constraint firstItem="xKK-eM-4Sb" firstAttribute="top" secondItem="p0u-XU-VkL" secondAttribute="bottom" id="qwS-hO-nTX"/>
+            </constraints>
+            <point key="canvasLocation" x="-18.5" y="44.5"/>
+        </view>
+    </objects>
+</document>

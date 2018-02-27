@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZXActiveGoodsListViewController" customModule="YDHYK" customModuleProvider="target">
+            <connections>
+                <outlet property="tblDrugList" destination="Aaf-zg-vJx" id="dd3-tl-LUs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zxGoodsListDD" destination="a9D-Ry-qAy" id="DOp-yT-Jrm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Aaf-zg-vJx">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="a9D-Ry-qAy" id="kXp-H3-PkR"/>
+                        <outlet property="delegate" destination="a9D-Ry-qAy" id="5Tl-PF-uUm"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Aaf-zg-vJx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1C5-bK-I2d"/>
+                <constraint firstAttribute="trailing" secondItem="Aaf-zg-vJx" secondAttribute="trailing" id="CRe-sF-gmB"/>
+                <constraint firstItem="Aaf-zg-vJx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GAR-4k-eBb"/>
+                <constraint firstAttribute="bottom" secondItem="Aaf-zg-vJx" secondAttribute="bottom" id="nUC-9m-djn"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="52.5"/>
+        </view>
+        <customObject id="a9D-Ry-qAy" customClass="ZXGoodsListDD" customModule="YDHYK" customModuleProvider="target"/>
+    </objects>
+</document>

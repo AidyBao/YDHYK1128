@@ -1,0 +1,1 @@
+link ../../../MJPhotoBrowser/MJPhotoBrowser/MJPhotoBrowser/MJPhotoBrowser.h

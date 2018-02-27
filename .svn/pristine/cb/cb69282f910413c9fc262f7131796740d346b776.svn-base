@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HOrderDetailViewController">
+            <connections>
+                <outlet property="btnControl1" destination="Ltq-2p-Aac" id="UgU-YR-7J9"/>
+                <outlet property="btnControl2" destination="R5N-ty-yg1" id="WUy-bV-brU"/>
+                <outlet property="control1Width" destination="G5r-WJ-S89" id="t15-8a-PZ1"/>
+                <outlet property="lbTotalPrice" destination="bfD-dd-zZy" id="Fhh-Kf-E0A"/>
+                <outlet property="lbTotalPriceRightOffset" destination="vRW-JY-v0X" id="Vec-UU-0a9"/>
+                <outlet property="tblOrderInfo" destination="30h-8e-hzd" id="Q68-Bq-PVX"/>
+                <outlet property="vBottomControl" destination="aDs-l4-2YU" id="rcl-O3-h31"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="30h-8e-hzd">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="9qM-4J-fif"/>
+                        <outlet property="delegate" destination="-1" id="IOc-RM-1lI"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDs-l4-2YU">
+                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltq-2p-Aac">
+                            <rect key="frame" x="281" y="6.5" width="80" height="35"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="G5r-WJ-S89"/>
+                                <constraint firstAttribute="height" constant="35" id="Zv6-q2-ZIC"/>
+                            </constraints>
+                            <state key="normal" title=" "/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5N-ty-yg1">
+                            <rect key="frame" x="187" y="7" width="80" height="35"/>
+                            <color key="backgroundColor" red="0.23137254901960785" green="0.52941176470588236" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="KUE-Xj-Kvg"/>
+                                <constraint firstAttribute="width" constant="80" id="Ys1-JE-HfV"/>
+                            </constraints>
+                            <state key="normal" title=" "/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bfD-dd-zZy">
+                            <rect key="frame" x="14" y="0.0" width="173" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="R5N-ty-yg1" firstAttribute="centerY" secondItem="aDs-l4-2YU" secondAttribute="centerY" id="50V-rd-vPy"/>
+                        <constraint firstItem="bfD-dd-zZy" firstAttribute="top" secondItem="aDs-l4-2YU" secondAttribute="top" id="6kP-en-dpZ"/>
+                        <constraint firstAttribute="trailing" secondItem="Ltq-2p-Aac" secondAttribute="trailing" constant="14" id="DZp-X1-KFE"/>
+                        <constraint firstAttribute="height" constant="49" id="Vpd-aC-akV"/>
+                        <constraint firstItem="Ltq-2p-Aac" firstAttribute="centerY" secondItem="aDs-l4-2YU" secondAttribute="centerY" id="n2e-c7-0Mh"/>
+                        <constraint firstItem="bfD-dd-zZy" firstAttribute="leading" secondItem="aDs-l4-2YU" secondAttribute="leading" constant="14" id="ur9-Ud-v7Q"/>
+                        <constraint firstItem="Ltq-2p-Aac" firstAttribute="leading" secondItem="bfD-dd-zZy" secondAttribute="trailing" constant="94" id="vRW-JY-v0X"/>
+                        <constraint firstItem="Ltq-2p-Aac" firstAttribute="leading" secondItem="R5N-ty-yg1" secondAttribute="trailing" constant="14" id="vgv-Lq-GBv"/>
+                        <constraint firstAttribute="bottom" secondItem="bfD-dd-zZy" secondAttribute="bottom" id="zza-4p-zfQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="aDs-l4-2YU" secondAttribute="bottom" id="FvX-JT-Qiv"/>
+                <constraint firstItem="30h-8e-hzd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SQg-vv-QIs"/>
+                <constraint firstItem="aDs-l4-2YU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Z8e-bk-Jhb"/>
+                <constraint firstItem="30h-8e-hzd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eH7-Lj-FFv"/>
+                <constraint firstAttribute="trailing" secondItem="aDs-l4-2YU" secondAttribute="trailing" id="g4n-GB-AEf"/>
+                <constraint firstItem="aDs-l4-2YU" firstAttribute="top" secondItem="30h-8e-hzd" secondAttribute="bottom" id="ny4-bu-P6p"/>
+                <constraint firstAttribute="trailing" secondItem="30h-8e-hzd" secondAttribute="trailing" id="rnV-oS-mIf"/>
+            </constraints>
+            <point key="canvasLocation" x="-530.5" y="37.5"/>
+        </view>
+    </objects>
+</document>

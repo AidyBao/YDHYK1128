@@ -1,0 +1,99 @@
+//
+//  ZXBalanceRemarkViewController.swift
+//  YDHYK
+//
+//  Created by screson on 2017/10/26.
+//  Copyright © 2017年 screson. All rights reserved.
+//
+
+import UIKit
+
+protocol ZXBalanceRemarkDelegate: class {
+    func zxRemarkInputDone(text: String,tag index: Int)
+}
+
+/// 订单备注
+class ZXBalanceRemarkViewController: ZXSTUIViewController {
+
+    weak var delegate: ZXBalanceRemarkDelegate?
+    var tagIndex = 0
+    var remark = ""
+    override var preferredCartButtonHidden: Bool { return true }
+    
+    @IBOutlet weak var bottomOffset: NSLayoutConstraint!
+    @IBOutlet weak var txtRemark: UITextView!
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.modalPresentationStyle = .custom
+        self.transitioningDelegate = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("Not init")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.clear
+        self.zx_addKeyboardNotification()
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
+        self.txtRemark.text = remark
+    }
+    
+    func textDidChange(_ notification:Notification) {
+        if let textV = notification.object as? UITextView,textV == self.txtRemark {
+            if let text = textV.text {
+                if text.characters.count > 64 {
+                    self.txtRemark.text = text.substring(to: text.index(text.startIndex, offsetBy: 64))
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !onceLoad {
+            self.txtRemark.becomeFirstResponder()
+            onceLoad = false
+        }
+    }
+    
+    override func zx_keyboardWillChangeFrameBegin(_ beginRect: CGRect, end endRect: CGRect, timeInterval dt: Double, notice: Notification!) {
+        self.bottomOffset.constant = -endRect.size.height
+        UIView.animate(withDuration: dt) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    override func zx_keyboardWillHideTimeInteval(_ dt: Double, notice: Notification!) {
+        self.bottomOffset.constant = 0
+        UIView.animate(withDuration: dt) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func closeAction(_ sender: Any) {
+        self.txtRemark.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func saveAction(_ sender: Any) {
+        self.txtRemark.resignFirstResponder()
+        delegate?.zxRemarkInputDone(text: self.txtRemark.text, tag: tagIndex)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        self.zx_removeKeyboardNotification()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidChange, object: nil)
+    }
+}
+
+extension ZXBalanceRemarkViewController:UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return ZXDimmingPresentationController.init(presentedViewController: presented, presenting: presenting)
+    }
+}

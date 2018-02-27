@@ -1,0 +1,425 @@
+//
+//  ZXShoppingCartViewController.swift
+//  YDHYK
+//
+//  Created by screson on 2017/10/23.
+//  Copyright © 2017年 screson. All rights reserved.
+//
+
+import UIKit
+
+
+/// 购物车列表
+class ZXShoppingCartViewController: ZXSTUIViewController {
+    
+    override var preferredCartButtonHidden: Bool { return true }
+    
+    static func postBalanceSuccess() {
+        NotificationCenter.default.post(name: NSNotification.Name.init("BalanceSuccess"), object: nil)
+    }
+    
+    @IBOutlet weak var tblList: UITableView!
+    @IBOutlet weak var bottomMenu: UIView!
+    @IBOutlet weak var btnCheckAll: UIButton!
+    @IBOutlet weak var lbTotalInfo: UILabel!
+    @IBOutlet weak var btnCommit: ZXRButton!
+    @IBOutlet weak var btnDelete: ZXRButton!
+    
+    @IBOutlet weak var lbFreightTips: UILabel!
+    
+    var cartList: Array<ZXDrugModel> = []
+    var storeList: Dictionary<String,ZXStoreDetailModel> = [:] //[storeId:model]
+    var errorDrugList: Array<String> = []
+    var recommendList: Array<ZXDrugModel> = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.zx_assist()
+        self.tblList.backgroundColor = UIColor.zx_assist()
+        self.tblList.register(UINib.init(nibName: ZXStoreDrugCell.NibName, bundle: nil), forCellReuseIdentifier: ZXStoreDrugCell.reuseIdentifier)
+        self.tblList.register(ZXSingleTextHeaderView.classForCoder(), forHeaderFooterViewReuseIdentifier: ZXSingleTextHeaderView.reuseIdentifier)
+        self.tblList.register(UINib.init(nibName: ZXSPCartStoreHeader.NibName, bundle: nil), forHeaderFooterViewReuseIdentifier: ZXSPCartStoreHeader.reuseIdentifier)
+        self.tblList.zx_addHeaderRefreshActionUseZXImage(true, target: self, action: #selector(zx_refresh))
+        
+        self.title = "购物车"
+        self.btnDelete.isHidden = true
+        self.lbTotalInfo.text = ""
+        self.btnCheckAll.setImage(#imageLiteral(resourceName: "dk-checkbox-2"), for: .normal)
+        self.btnCheckAll.setImage(#imageLiteral(resourceName: "dk-checkbox-1"), for: .selected)
+        
+        self.loadCartList(showHUD: true)
+        self.loadRecommendList()
+        
+        self.updateTotalInfo()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(balanceSuccess), name: NSNotification.Name.init("BalanceSuccess"), object: nil)
+    }
+    
+    
+    //MARK: - 删除
+    @IBAction func deleteAction(_ sender: UIButton) {
+        let selectedList = self.selectedModels()
+        if selectedList.count > 0 {
+            self.deleteCellWith(drugModels: selectedList)
+        } else {
+            ZXHUD.mbShowFailure(in: self.view, text: "请选择商品", delay: ZX.DELAY_INTERVAL)
+        }
+    }
+    
+    //减到0 也调用这个方法
+    func deleteCellWith(drugModels: [ZXDrugModel]) {
+        if self.cartList.count > 0,drugModels.count > 0 {
+            var sectionIndexs:Array<Int> = []
+            var storeId = ""
+            for drug in drugModels {
+                sectionIndexs.append(drug.zx_sectionIndex)
+                storeId = "\(drug.drugstoreId)"
+                ZXCart.cart.delete(storeId: "\(drug.drugstoreId)", drugId: "\(drug.baseDrugId)")
+                if let index = self.cartList.index(of: drug) {
+                    self.cartList.remove(at: index)
+                }
+            }
+            
+            if let list  = ZXCart.cart.modelsListFor(storeId: storeId),list.count > 0 {
+                self.storeList[storeId]?.zx_checked = self.isAllCheckedfor(storeId: storeId)
+            } else {
+                self.storeList.removeValue(forKey: storeId)
+            }
+            
+            self.tblList.deleteSections(IndexSet(sectionIndexs), with: .automatic)
+            if self.cartList.count == 0 {
+                self.navigationItem.rightBarButtonItems = nil
+                self.btnCommit.isHidden = false
+                self.lbTotalInfo.isHidden = false
+                self.lbFreightTips.isHidden = false
+                self.btnDelete.isHidden = true
+            }
+            self.reloadAction(reBuild: false)
+        }
+    }
+    //MARK: - 全选
+    @IBAction func checkAllAction(_ sender: UIButton) {
+        if self.cartList.count > 0 {
+            self.btnCheckAll.isSelected = self.btnCheckAll.isSelected ? false : true
+            ZXCart.cart.checkAll(self.btnCheckAll.isSelected)
+            for m in self.cartList {
+                m.zx_checked = self.btnCheckAll.isSelected
+                self.storeList["\(m.drugstoreId)"]?.zx_checked = self.btnCheckAll.isSelected
+            }
+        } else {
+            self.btnCheckAll.isSelected = false
+        }
+        self.reloadAction(reBuild: false)
+    }
+    
+    //MARK: - 结算
+    @IBAction func commitAction(_ sender: UIButton) {
+        if ZXCart.cart.hasOneChecked {
+            ZXHUD.mbShowLoading(in: self.view, text: ZX_LOADING_TEXT, delay: 0)
+            ZXDrugStoreViewModel.balanceAction(cartData: ZXCart.cart.zx_selectedJsonString ?? "", memberId: ZXStoreParams.memberId, token: ZXStoreParams.token, completion: { (sucess, code, balanceModel, errorMsg) in
+                ZXHUD.mbHide(for: self.view, animate: true)
+                if sucess {
+                    let balanceVC = ZXBalanceViewController()
+                    balanceVC.balanceModel = balanceModel
+                    self.navigationController?.pushViewController(balanceVC, animated: true)
+                } else {
+                    if code == ZXAPI_LOGIN_INVALID {
+                        ZXHUD.mbShowFailure(in: self.view, text: errorMsg, delay: ZX.DELAY_INTERVAL)
+                    }
+                }
+            })
+        } else {
+            ZXHUD.mbShowFailure(in: self.view, text: "请选择商品", delay: ZX.DELAY_INTERVAL)
+        }
+    }
+    
+    /// 订单提交成功 清除相关数据
+    func balanceSuccess() {//订单提交完成
+        let list = self.selectedModels()
+        if list.count > 0 {
+            for drug in list {
+                ZXCart.cart.delete(storeId: "\(drug.drugstoreId)", drugId: "\(drug.baseDrugId)")
+            }
+            self.deleteCellWith(drugModels: list)
+        }
+    }
+    
+    
+    override func zx_refresh() {
+        self.loadCartList(showHUD: false)
+        self.loadRecommendList()
+        
+        ZXDrugStoreViewModel.storeDetail(storeId: ZXStoreParams.storeId, memberId: ZXStoreParams.memberId, token: ZXStoreParams.token) { (s, c, error, model) in
+            if s {
+                ZXStoreParams.storeInfo = model
+            }
+        }
+    }
+    
+    /// 数据请求完成 初次构造
+    func reloadAction(reBuild:Bool) {
+        if self.errorDrugList.count > 0 {
+            ZXHUD.mbShowFailure(in: self.view, text: "已清除\(self.errorDrugList.count)件失效商品", delay: ZX.DELAY_INTERVAL)
+            for store_drug in errorDrugList {
+                let arr = store_drug.components(separatedBy: "###")
+                if arr.count == 2 {
+                    let storeId = arr.first!
+                    let drugId = arr.last!
+                    ZXCart.cart.delete(storeId: storeId, drugId: drugId)
+                }
+            }
+            self.errorDrugList.removeAll()
+        }
+        if reBuild,self.cartList.count > 0 {
+            for model in self.cartList {
+                let nativeCartModel = ZXCart.cart.modelFor(storeId: "\(model.drugstoreId)", drugId: "\(model.baseDrugId)")
+                if let nm = nativeCartModel {
+                    model.zx_buyCount = nm.selectedCount
+                    model.zx_checked = nm.checked
+                }
+            }
+            for store in self.storeList.values {
+                //Header 是否选中
+                self.storeList[store.storeId]?.zx_checked = self.isAllCheckedfor(storeId: store.storeId)
+            }
+            self.zx_addRightBarItems(withTexts: ["编辑"], font: UIFont.zx_titleFont(withSize: zx_title2FontSize()), color: UIColor.white)
+            changeToeditDone = true
+        }
+        self.tblList.reloadData()
+        self.updateTotalInfo()
+    }
+    
+    fileprivate var changeToeditDone = true
+    override func zx_rightBarButtonActionsIndex(_ index: Int) {
+        if changeToeditDone {
+            self.zx_addRightBarItems(withTexts: ["完成"], font: UIFont.zx_titleFont(withSize: zx_title2FontSize()), color: UIColor.white)
+            self.lbTotalInfo.isHidden = true
+            self.lbFreightTips.isHidden = true
+            self.btnCommit.isHidden = true
+            self.btnDelete.isHidden = false
+            changeToeditDone = false
+        } else {
+            self.zx_addRightBarItems(withTexts: ["编辑"], font: UIFont.zx_titleFont(withSize: zx_title2FontSize()), color: UIColor.white)
+            self.lbTotalInfo.isHidden = false
+            self.lbFreightTips.isHidden = false
+            self.btnCommit.isHidden = false
+            self.btnDelete.isHidden = true
+            changeToeditDone = true
+        }
+    }
+    
+    fileprivate func loadCartList(showHUD: Bool) {
+        
+        if let data = ZXCart.cart.cartJsonString {
+            if showHUD {
+                ZXHUD.mbShowLoading(in: self.view, text: ZX_LOADING_TEXT, delay: 0)
+            }
+            ZXDrugStoreViewModel.cartList(cartData: data, memberId: ZXStoreParams.memberId, token: ZXStoreParams.token, completion: { (c, s, drugList, storeList, errorList, errorMsg) in
+                ZXHUD.mbHide(for: self.view, animate: true)
+                self.tblList.mj_header.endRefreshing()
+                if s {
+                    self.cartList = drugList ?? []
+                    self.storeList = storeList ?? [:]
+                    self.errorDrugList = errorList ?? []
+                    self.reloadAction(reBuild: true)
+                } else {
+                    if c != ZXAPI_LOGIN_INVALID {
+                        ZXHUD.mbShowFailure(in: self.view, text: errorMsg, delay: ZX.DELAY_INTERVAL)
+                    }
+                }
+            })
+        } else {
+            self.tblList.mj_header.endRefreshing()
+            ZXHUD.mbShowFailure(in: self.view, text: "购物车为空", delay: ZX.DELAY_INTERVAL)
+        }
+    }
+    
+    //MARK: - 推荐商品
+    fileprivate func loadRecommendList () {
+        ZXStoreHomeViewModel.recommendList(storeId: ZXStoreParams.storeId, memberId: ZXStoreParams.memberId, token: ZXStoreParams.token) { (s, c, errorMsg, list) in
+            if s {
+                self.recommendList = list
+                self.tblList.reloadData()
+            }//失败不作处理
+        }
+    }
+    
+    /// 判断是否包邮
+    ///
+    /// - Parameter storeId:
+    /// - Returns:
+    func isFreeFreight(for storeId: String) -> Bool {
+        if let store = self.storeList[storeId] {
+            if self.storeDrugsTotalPrice(storeId: storeId) >= store.freeSndPrice {
+                return true
+            }
+        }
+        return false
+    }
+    
+    /// 某个店铺下商品总价（用于判断是否包邮）
+    ///
+    /// - Parameter storeId:
+    /// - Returns:
+    func storeDrugsTotalPrice(storeId: String) -> Double {
+        if self.cartList.count > 0 ,self.storeList[storeId] != nil {
+            var totalPrice: Double = 0
+            for d in self.cartList {
+                if "\(d.drugstoreId)" == storeId {
+                    if let model = ZXCart.cart.modelFor(storeId: storeId, drugId: "\(d.baseDrugId)") {
+                        totalPrice += d.zx_truePrice * Double(model.selectedCount)
+                    }
+                }
+            }
+            return totalPrice
+        }
+        return 0
+    }
+    
+    //CartList Drug Model
+    func cartListDrugModel(for drugId: String) -> ZXDrugModel? {
+        if cartList.count > 0 {
+            var drug: ZXDrugModel?
+            for d in self.cartList {
+                if "\(d.baseDrugId)" == drugId {
+                    drug = d
+                    break
+                }
+            }
+            return drug
+        }
+        return nil
+    }
+    
+    /// 某个店铺商品是否全部选中
+    ///
+    /// - Parameter storeId:
+    /// - Returns:
+    func isAllCheckedfor(storeId: String) -> Bool {
+        if self.storeList[storeId] != nil,self.cartList.count > 0 {
+            var allCheck = true
+            for m in self.cartList {
+                if "\(m.drugstoreId)" == storeId,m.zx_checked == false {
+                    allCheck = false
+                    break
+                }
+            }
+            return allCheck
+        }
+        return false
+    }
+    /// 推荐商品 + 1
+    /// 购物车商品 +1 ，没有新增一条 drug/store
+    func drugAddOne(durgId: String,storeId: String,drugModel:ZXDrugModel) {
+        var rebuild = true
+        if self.cartList.count > 0 {
+            rebuild = false
+        }
+        if self.storeList[storeId] != nil { //购物车列表存在该店铺
+            var index = -1
+            var hasSameDrug = false //是否存在该商品
+            for d in self.cartList {
+                index += 1
+                if "\(d.baseDrugId)" == durgId {
+                    hasSameDrug = true
+                    break
+                }
+            }
+            if !hasSameDrug {
+                var isFind = false //是否存在该店下的其他商品
+                for d in self.cartList {
+                    index += 1
+                    if "\(d.drugstoreId)" == storeId {
+                        isFind = true
+                        break
+                    }
+                }
+                if isFind { //存在该店下的其他商品
+                    self.cartList.insert(drugModel, at: index)
+                } else {
+                    self.cartList.insert(drugModel, at: 0)
+                }
+            } // else 存在该商品 tableview  刷新即可
+            
+        } else { //购物车列表不存在该店铺  插入 drug/store
+            if let store = ZXStoreParams.storeInfo {
+                self.cartList.insert(drugModel, at: 0)
+                self.storeList[storeId] = store
+            } else { //缓存店铺数据未正常加载
+                ZXHUD.mbShowFailure(in: self.view, text: "店铺信息加载失败,可尝试刷新列表", delay: ZX.DELAY_INTERVAL)
+            }
+        }
+        self.reloadAction(reBuild: rebuild)
+    }
+    
+    /// 推荐商品 - 1
+    /// 购物车商品 +1 ，== 0 时 移除 drug/store
+    func drugSubOne(durgId: String,storeId: String,drugModel:ZXDrugModel) {
+        if self.storeList[storeId] != nil { //购物车列表存在该店铺
+            var existDrug:ZXDrugModel?
+            var index = -1
+            for d in self.cartList {
+                index += 1
+                if d.baseDrugId == drugModel.baseDrugId {
+                    existDrug = d
+                    break
+                }
+            }
+            if let drug = existDrug {
+                if ZXCart.cart.modelFor(storeId: storeId, drugId: "\(drug.baseDrugId)") == nil{ // == 0 已删除
+                    self.cartList.remove(at: index)
+                }
+            } // else tableview 刷新即可
+        } else { //-1 在 异常情况下 才会不存在
+            ZXHUD.mbShowFailure(in: self.view, text: "店铺信息加载失败,可尝试刷新列表", delay: ZX.DELAY_INTERVAL)
+        }
+    }
+    
+    fileprivate func selectedModels() -> [ZXDrugModel] {
+        if self.cartList.count > 0 {
+            var list = [ZXDrugModel]()
+            for model in self.cartList {
+                if model.zx_checked {
+                    list.append(model)
+                }
+            }
+            return list
+        }
+        return []
+    }
+    //MARK: - 总金额信息
+    func updateTotalInfo() {
+        let selectedList = self.selectedModels()
+        if selectedList.count > 0 {
+            var price: Double = 0
+            var count: Int = 0
+            for m in selectedList {
+                price += m.zx_truePrice * Double(m.zx_buyCount)
+                count += m.zx_buyCount
+            }
+            self.btnCommit.setTitle("去结算(\(count))", for: .normal)
+            let total = "合计 "
+            let attr = NSAttributedString.zx_addFont(toText: total, with: UIFont.zx_titleFont(withSize: zx_bodyFontSize() - 2), at: NSMakeRange(0, total.characters.count))
+            let priceStr = "\(price)".zx_priceString()
+            if let pAttr = NSAttributedString.zx_addFont(toText: priceStr, with: UIFont.zx_titleFont(withSize: zx_title1FontSize()), at: NSMakeRange(0, (priceStr.characters.count))) {
+                pAttr.zx_append(UIColor.zx_customB(), at: NSMakeRange(0, priceStr.characters.count))
+                attr?.append(pAttr)
+            }
+            self.lbTotalInfo.attributedText = attr
+        } else {
+            self.btnCommit.setTitle("去结算(\(0))", for: .normal)
+            let total = "合计 "
+            let attr = NSAttributedString.zx_addFont(toText: total, with: UIFont.zx_titleFont(withSize: zx_bodyFontSize() - 2), at: NSMakeRange(0, total.characters.count))
+            let price = "0".zx_priceString()
+            if let pAttr = NSAttributedString.zx_addFont(toText: price, with: UIFont.zx_titleFont(withSize: zx_title1FontSize()), at: NSMakeRange(0, (price.characters.count))) {
+                pAttr.zx_append(UIColor.zx_customB(), at: NSMakeRange(0, price.characters.count))
+                attr?.append(pAttr)
+            }
+            self.lbTotalInfo.attributedText = attr
+            self.btnCheckAll.isSelected = false
+        }
+        self.btnCheckAll.isSelected = ZXCart.cart.isAllChecked
+    }
+}

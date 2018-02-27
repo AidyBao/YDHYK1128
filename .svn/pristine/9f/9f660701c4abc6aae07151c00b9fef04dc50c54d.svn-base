@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZXShoppingCartViewController" customModule="YDHYK" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomMenu" destination="8Qa-gQ-ubE" id="2NV-wA-fdn"/>
+                <outlet property="btnCheckAll" destination="nOe-yl-6nW" id="H3Z-MF-jS8"/>
+                <outlet property="btnCommit" destination="1Z3-Se-ssf" id="fAm-iW-eo9"/>
+                <outlet property="btnDelete" destination="RsE-OK-hsP" id="hx3-Ko-0hS"/>
+                <outlet property="lbFreightTips" destination="Bvb-OC-Abr" id="8bd-LQ-GgX"/>
+                <outlet property="lbTotalInfo" destination="YcI-H9-d5e" id="TPO-gF-W7B"/>
+                <outlet property="tblList" destination="fXj-13-sOR" id="n8v-5w-j9m"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qa-gQ-ubE">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Z3-Se-ssf" customClass="ZXRButton" customModule="YDHYK" customModuleProvider="target">
+                            <rect key="frame" x="255" y="0.0" width="120" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="KCT-Eq-UBB"/>
+                            </constraints>
+                            <state key="normal" title="去结算(0)"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="colorType">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="commitAction:" destination="-1" eventType="touchUpInside" id="yho-IV-2Sv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsE-OK-hsP" customClass="ZXRButton" customModule="YDHYK" customModuleProvider="target">
+                            <rect key="frame" x="255" y="0.0" width="120" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="oAm-wM-n26"/>
+                            </constraints>
+                            <state key="normal" title="删除"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="colorType">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="deleteAction:" destination="-1" eventType="touchUpInside" id="Joj-Sx-CwC"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOe-yl-6nW">
+                            <rect key="frame" x="8" y="14.5" width="70" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="bmY-Jy-V2e"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                            <state key="normal" title="全选" image="dk-checkbox-2">
+                                <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="checkAllAction:" destination="-1" eventType="touchUpInside" id="8Dh-cC-qWh"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YcI-H9-d5e">
+                            <rect key="frame" x="78" y="0.0" width="172" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不含运费" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvb-OC-Abr">
+                            <rect key="frame" x="200.5" y="30" width="49.5" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Bvb-OC-Abr" firstAttribute="top" secondItem="YcI-H9-d5e" secondAttribute="bottom" constant="-5" id="2nr-Ev-Zog"/>
+                        <constraint firstAttribute="trailing" secondItem="1Z3-Se-ssf" secondAttribute="trailing" id="4TM-dw-hdn"/>
+                        <constraint firstItem="RsE-OK-hsP" firstAttribute="top" secondItem="8Qa-gQ-ubE" secondAttribute="top" id="6Lh-6n-Y2Q"/>
+                        <constraint firstAttribute="bottom" secondItem="1Z3-Se-ssf" secondAttribute="bottom" id="B9e-FB-1kP"/>
+                        <constraint firstAttribute="bottom" secondItem="YcI-H9-d5e" secondAttribute="bottom" constant="15" id="ElM-ne-8Fy"/>
+                        <constraint firstItem="1Z3-Se-ssf" firstAttribute="leading" secondItem="YcI-H9-d5e" secondAttribute="trailing" constant="5" id="NZi-yY-fdg"/>
+                        <constraint firstAttribute="trailing" secondItem="RsE-OK-hsP" secondAttribute="trailing" id="TnS-pl-Iie"/>
+                        <constraint firstItem="YcI-H9-d5e" firstAttribute="top" secondItem="8Qa-gQ-ubE" secondAttribute="top" id="Z9C-RN-z30"/>
+                        <constraint firstAttribute="height" constant="50" id="d2T-PS-lcD"/>
+                        <constraint firstItem="nOe-yl-6nW" firstAttribute="centerY" secondItem="8Qa-gQ-ubE" secondAttribute="centerY" id="efA-M8-Ivd"/>
+                        <constraint firstItem="1Z3-Se-ssf" firstAttribute="top" secondItem="8Qa-gQ-ubE" secondAttribute="top" id="gEb-H3-c9S"/>
+                        <constraint firstItem="nOe-yl-6nW" firstAttribute="leading" secondItem="8Qa-gQ-ubE" secondAttribute="leading" constant="8" id="l1l-wZ-8mw"/>
+                        <constraint firstItem="YcI-H9-d5e" firstAttribute="leading" secondItem="nOe-yl-6nW" secondAttribute="trailing" id="nV4-5y-lI9"/>
+                        <constraint firstAttribute="bottom" secondItem="RsE-OK-hsP" secondAttribute="bottom" id="rLZ-rZ-I7x"/>
+                        <constraint firstItem="Bvb-OC-Abr" firstAttribute="trailing" secondItem="YcI-H9-d5e" secondAttribute="trailing" id="svS-Ky-wvP"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-13-sOR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LjH-gy-CW2"/>
+                        <outlet property="delegate" destination="-1" id="BIh-WR-WTz"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="8Qa-gQ-ubE" firstAttribute="top" secondItem="fXj-13-sOR" secondAttribute="bottom" id="8JD-Gk-lyf"/>
+                <constraint firstItem="fXj-13-sOR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YXm-dV-9gO"/>
+                <constraint firstItem="fXj-13-sOR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="acA-1H-5ig"/>
+                <constraint firstItem="8Qa-gQ-ubE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vzc-e4-yxT"/>
+                <constraint firstAttribute="trailing" secondItem="8Qa-gQ-ubE" secondAttribute="trailing" id="wTQ-Qv-thp"/>
+                <constraint firstAttribute="bottom" secondItem="8Qa-gQ-ubE" secondAttribute="bottom" id="wbw-YV-ctI"/>
+                <constraint firstAttribute="trailing" secondItem="fXj-13-sOR" secondAttribute="trailing" id="yxe-ae-vBk"/>
+            </constraints>
+            <point key="canvasLocation" x="26.5" y="51.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dk-checkbox-2" width="20" height="20"/>
+    </resources>
+</document>

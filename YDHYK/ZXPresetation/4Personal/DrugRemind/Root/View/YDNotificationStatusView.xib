@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YDNotificationStatusView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="允许推送通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7v-rY-RiG">
+                    <rect key="frame" x="15" y="16" width="130" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="LWj-Ks-b4R"/>
+                        <constraint firstAttribute="height" constant="21" id="hOo-cB-aCe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.94901960784313721" green="0.5725490196078431" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我们会在用药时间及时提醒你" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcr-fK-0o3">
+                    <rect key="frame" x="15" y="40.5" width="285" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="PFX-sS-Q0a"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.62352941176470589" green="0.64313725490196072" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2y-Ys-pAX">
+                    <rect key="frame" x="300" y="16" width="60" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="hnk-Cd-SpX"/>
+                        <constraint firstAttribute="height" constant="40" id="jp9-wr-nio"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="开启">
+                        <color key="titleColor" red="0.94901960784313721" green="0.5725490196078431" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="turnOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="PMJ-S0-Kti"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.99607843137254903" green="0.95686274509803915" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="J7v-rY-RiG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7de-us-Tzq"/>
+                <constraint firstItem="o2y-Ys-pAX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MHQ-pf-OfU"/>
+                <constraint firstItem="Fcr-fK-0o3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="15" id="QH4-yu-I9m"/>
+                <constraint firstAttribute="trailing" secondItem="o2y-Ys-pAX" secondAttribute="trailing" constant="15" id="Qbe-cu-TpQ"/>
+                <constraint firstItem="Fcr-fK-0o3" firstAttribute="leading" secondItem="J7v-rY-RiG" secondAttribute="leading" id="VJ7-Hs-hEQ"/>
+                <constraint firstItem="o2y-Ys-pAX" firstAttribute="leading" secondItem="Fcr-fK-0o3" secondAttribute="trailing" id="iYs-u0-65E"/>
+                <constraint firstItem="J7v-rY-RiG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-10" id="nnv-Oz-RUr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="3.5" y="-242.5"/>
+        </view>
+    </objects>
+</document>

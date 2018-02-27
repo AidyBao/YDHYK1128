@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>zx_tilteFontName</key>
+	<string>PingFangSC-Regular</string>
+	<key>zx_bodyFontName</key>
+	<string>PingFangSC-Light</string>
+	<key>zx_customAFontName</key>
+	<string></string>
+	<key>zx_customBFontName</key>
+	<string></string>
+	<key>zx_iconfontName</key>
+	<string>iconfont</string>
+	<key>zx_title1FontSize</key>
+	<dict>
+		<key>iPhone5</key>
+		<integer>15</integer>
+		<key>iPhone6</key>
+		<integer>17</integer>
+		<key>iPhone6P</key>
+		<integer>18</integer>
+	</dict>
+	<key>zx_title2FontSize</key>
+	<dict>
+		<key>iPhone5</key>
+		<integer>14</integer>
+		<key>iPhone6</key>
+		<integer>15</integer>
+		<key>iPhone6P</key>
+		<integer>16</integer>
+	</dict>
+	<key>zx_bodyFontSize</key>
+	<dict>
+		<key>iPhone5</key>
+		<integer>13</integer>
+		<key>iPhone6</key>
+		<integer>14</integer>
+		<key>iPhone6P</key>
+		<integer>15</integer>
+	</dict>
+	<key>zx_textColor</key>
+	<string>#3b3e43</string>
+	<key>zx_sub1TextColor</key>
+	<string>#5e6269</string>
+	<key>zx_sub2TextColor</key>
+	<string>#9fa4ac</string>
+</dict>
+</plist>

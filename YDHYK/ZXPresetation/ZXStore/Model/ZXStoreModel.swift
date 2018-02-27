@@ -1,0 +1,334 @@
+//
+//  ZXSoreModel.swift
+//  YDHYK
+//
+//  Created by screson on 2017/10/12.
+//  Copyright © 2017年 screson. All rights reserved.
+//
+
+import UIKit
+
+
+/// 店铺活动
+class ZXStoreActive: NSObject {
+    var title: String = ""
+    var subTitle: String = ""
+    var icon: String = ""       //icon
+    var image: String = ""      //小图标
+    var bigImage: String = ""   //大图
+    var templateId: String = ""
+    var activeItem: String = ""
+}
+
+
+/// 店铺首页配置
+class ZXStoreModel: NSObject {
+    var drugstoreTemplateId = ""
+    var drugstoreName = ""
+    //活动
+    var activeCount: Int = 0 // 0 无活动，1 一个活动（显示活动商品） 2 两个活动（Type2）3
+    var activeOneTitle: String = ""
+    var activeOneIcon: String = ""
+    var activeOneImg: String = ""
+    var activeOneBigImg: String = ""
+    var activeOneSubtitle: String = ""
+    var activeOneStatus: Int = 0 // 1 valid
+    var activeTwoTitle: String = ""
+    var activeTwoIcon: String = ""
+    var activeTwoImg: String = ""
+    var activeTwoBigImg: String = ""
+    var activeTwoSubtitle: String = ""
+    var activeTwoStatus: Int = 0
+    var activeThreeTitle: String = ""
+    var activeThreeIcon: String = ""
+    var activeThreeImg: String = ""
+    var activeThreeBigImg: String = ""
+    var activeThreeSubtitle: String = ""
+    var activeThreeStatus: Int = 0
+    
+    var zx_ActiveList: [ZXStoreActive] {
+        get {
+            var list: Array<ZXStoreActive> = []
+            for i in 0..<3 {
+                if let active = self.active(at: i) {
+                    list.append(active)
+                }
+            }
+            return list
+        }
+    }
+    //activeThreeStatus == 1 活动有效，具体哪一个不确定
+    fileprivate func active(at index: Int) -> ZXStoreActive? {
+        switch index {
+            case 0:
+                if activeOneStatus == 1 {
+                    let active = ZXStoreActive()
+                    active.title = activeOneTitle
+                    active.subTitle = activeOneSubtitle
+                    active.icon = activeOneIcon
+                    active.image = activeOneImg
+                    active.bigImage = activeOneBigImg
+                    active.templateId = self.drugstoreTemplateId
+                    active.activeItem = "1"
+                    return active
+                } else {
+                    return nil
+            }
+            case 1:
+                if activeTwoStatus == 1 {
+                    let active = ZXStoreActive()
+                    active.title = activeTwoTitle
+                    active.subTitle = activeTwoSubtitle
+                    active.icon = activeTwoIcon
+                    active.image = activeTwoImg
+                    active.bigImage = activeTwoBigImg
+                    active.templateId = self.drugstoreTemplateId
+                    active.activeItem = "2"
+                    return active
+                } else {
+                    return nil
+                }
+            case 2:
+                if activeThreeStatus == 1 {
+                    let active = ZXStoreActive()
+                    active.title = activeThreeTitle
+                    active.subTitle = activeThreeSubtitle
+                    active.icon = activeThreeIcon
+                    active.image = activeThreeImg
+                    active.bigImage = activeThreeBigImg
+                    active.templateId = self.drugstoreTemplateId
+                    active.activeItem = "3"
+                    return active
+                } else {
+                    return nil
+                }
+            default:
+                return nil
+        }
+    }
+    
+    //分类 图标 id 名称
+    var sortIcons = "" //### 分隔
+    var sortIds = ""
+    var sortNames = ""
+    
+    var zx_sorts: Array<ZXCategoryTreeModel>? {
+        get {
+            if let names = self.zx_sortNames {
+                var list: Array<ZXCategoryTreeModel> = []
+                for n in 0..<names.count {
+                    let model = ZXCategoryTreeModel()
+                    model.cid = zx_sortIds![n]
+                    model.icon = zx_sortIcons![n]
+                    model.name = zx_sortNames![n]
+                    list.append(model)
+                }
+                return list
+            }
+            return nil
+        }
+    }
+    
+    fileprivate var zx_sortIcons: Array<String>? {
+        get {
+            if !sortIcons.isEmpty {
+                return sortIcons.components(separatedBy: "###")
+            }
+            return nil
+        }
+    }
+    
+    fileprivate var zx_sortIds: Array<String>? {
+        get {
+            if !sortIds.isEmpty {
+                return sortIds.components(separatedBy: "###")
+            }
+            return nil
+        }
+    }
+    
+    fileprivate var zx_sortNames: Array<String>? {
+        get {
+            if !sortNames.isEmpty {
+                return sortNames.components(separatedBy: "###")
+            }
+            return nil
+        }
+    }
+
+    //有效活动为 1
+    var activeList:Array<ZXDrugModel> = []
+    
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable : Any]! {
+        return ["drugstoreTemplateId":"id"]
+    }
+    
+    override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["activeList":ZXDrugModel.self]
+    }
+}
+
+
+/// 店铺详情
+class ZXStoreDetailModel: NSObject {
+    var zx_checked = false
+
+    var name:String =  ""   //店铺名称
+    var address:String =  ""
+    var tel:String =  ""
+    var closeTime:String =  ""
+    var openTime:String =  ""
+    var headPortraitStr:String =  "" //店铺图片
+    var qrCode:String =  ""
+    var longitude:Double =  104.06265500000001
+    var latitude:Double =  30.596057999999999
+    
+    var provinceName:String =  ""
+    var provinceId:String =  ""
+    var cityName:String =  ""
+    var cityId:String =  ""
+    var districtName:String =  ""
+    var districtId:String =  ""
+
+    var groupId:String =  ""
+    var groupName:String =  ""      //集团名称
+    var groupProfile:String =  ""   //集团描述
+    var groupFiles:String =  ""     //集团logo
+    var remark:String =  ""         //描述 （结算界面又来存储备注）
+    var freight:Double =  0
+    var profile:String =  ""
+
+    var promise:String =  ""    //服务承诺 逗号分割
+    var zxpromiseDescrition: String =  "" //服务描述 ####分割
+    //var pIcon:String =  ""      //服务承诺图标 逗号分割 【无】
+    var keyWord:String =  ""    //服务承诺关键字 逗号分割
+    
+    
+    fileprivate var promiseList:Array<ZXPromiseItemModel>?
+    var zx_promiseList: Array<ZXPromiseItemModel> {
+        get {
+            if promiseList == nil {
+                promiseList = []
+                let titles = promise.components(separatedBy: ",")
+                let detials = zxpromiseDescrition.components(separatedBy: "####")
+                let keyWords = keyWord.components(separatedBy: ",")
+                for (idx,title) in titles.enumerated() {
+                    let item = ZXPromiseItemModel()
+                    item.title = title
+                    item.detailInfo = detials[idx]
+                    var k = keyWords[idx]
+                    if k.characters.count > 1 {
+                        if !ZXStringUtils.isString(k, matchingRegularString: "^\\d{1,}") { //非纯数字
+                            k = k.substring(to: k.index(k.startIndex, offsetBy: 1))
+                        }
+                    }
+                    item.keyWord = k
+                    promiseList?.append(item)
+                }
+            }
+            return promiseList!
+        }
+    }
+    
+    var zx_promiseAttributeString: NSAttributedString {
+        get {
+            if !promise.isEmpty {
+                let code = "\u{e6a7} "
+                let aCode = NSAttributedString.zx_addFont(toText: code, with: UIFont.zx_iconfont(withSize: zx_bodyFontSize()), at: NSMakeRange(0, 1))
+                aCode?.zx_append(UIColor.zx_tint(), at: NSMakeRange(0, 1))
+                let attr = NSMutableAttributedString.init(string: "")
+                let list = promise.components(separatedBy: ",")
+                if list.count > 0 {
+                    for mark in list {
+                        let text = "\(mark) "
+                        if let aCode = aCode {
+                            attr.append(aCode)
+                        }
+                        attr.append(NSAttributedString.zx_addFont(toText: text, with: UIFont.zx_bodyFont(withSize: zx_bodyFontSize() - 2), at: NSMakeRange(0, text.characters.count)))
+                    }
+                }
+                return attr
+            }
+            return NSAttributedString.init(string: "")
+        }
+    }
+    
+    var zx_businessHours: String {
+        get {
+            return "\(openTime)-\(closeTime)"
+        }
+    }
+    
+    var memberCollects:String =  ""
+    var freeSndPrice:Double =  0
+    var headPortrait:String =  ""
+    var isChineseMedicine:Int =  0
+    var status:Int =  1
+    var supportDistribution:String =  ""
+    var isMember:Int =  0
+    
+    var storeId: String = ""
+    
+    //结算商品列表
+    var drugCounterList: Array<ZXDrugModel> = []
+    
+    override static func mj_replacedKeyFromPropertyName() -> [AnyHashable : Any]! {
+        return ["zxpromiseDescrition":"description","storeId": "id"]
+    }
+
+    override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
+        return ["drugCounterList":ZXDrugModel.self]
+    }
+    
+    
+    /// 已购买商品价格 不含运费
+    var zx_balanceTotalPrice: Double {
+        if drugCounterList.count > 0 {
+            var total: Double = 0
+            for drug in drugCounterList {
+                total += drug.zx_truePrice * Double(drug.num)
+            }
+            return total
+        }
+        return 0
+    }
+    
+    /// 运费描述
+    var zx_freightInfo: String {
+        //送货上门
+        if zx_receiveType == 1,freeSndPrice > 0,self.zx_balanceTotalPrice < freeSndPrice {
+            return "含配送费\(String.init(format: "%0.2f", freight))元"
+        }
+        return "免配送费"
+    }
+    var zx_freight: Double {
+        if zx_receiveType == 1,freeSndPrice > 0,self.zx_balanceTotalPrice < freeSndPrice {
+            return freight
+        }
+        return 0
+    }
+    var zx_isSupportDistribution: Bool {//是否支付送货上门
+        get {
+            if supportDistribution == "1" {
+                return true
+            }
+            return false
+        }
+    }
+    var zx_receiveType: Int = 2 //1送货上门 2 到店自提
+    var zx_paymentType: Int = 2 //1在线支付 2 现金支付（线下）
+    var zx_expressDecription: String {
+        get {
+            return "现金支付 " + ((zx_receiveType == 2) ? "到店自提" : "送货上门")
+        }
+    }
+}
+
+
+/// 服务条款
+class ZXPromiseItemModel: NSObject {
+    var title = ""
+    var detailInfo = ""
+    var keyWord = ""
+}
+

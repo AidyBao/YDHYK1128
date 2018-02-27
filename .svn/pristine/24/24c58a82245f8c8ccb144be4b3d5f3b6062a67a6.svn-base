@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ZXBuyCountCollectionReusableView" customModule="YDHYK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gr-Ue-kEv">
+                    <rect key="frame" x="186" y="0.0" width="60" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="L6c-3b-bry"/>
+                    </constraints>
+                    <state key="normal" image="dk-reduce"/>
+                    <connections>
+                        <action selector="subAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="kkb-QU-pzZ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxn-Ys-kQN" customClass="ZXUILabel" customModule="YDHYK" customModuleProvider="target">
+                    <rect key="frame" x="249" y="21" width="8" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="typeIndex">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hck-gG-hGZ" customClass="ZXUILabel" customModule="YDHYK" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="21" width="35" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="typeIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBa-dF-sgu">
+                    <rect key="frame" x="260" y="0.0" width="60" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="dQ3-6c-GNl"/>
+                    </constraints>
+                    <state key="normal" image="dk-plus"/>
+                    <connections>
+                        <action selector="plusAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="mPe-Tr-MgR"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCw-b7-kJU">
+                    <rect key="frame" x="0.0" y="5" width="320" height="0.5"/>
+                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="2Ha-8j-bsB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="9gr-Ue-kEv" secondAttribute="bottom" id="1nv-Ng-hak"/>
+                <constraint firstItem="qCw-b7-kJU" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="5" id="CAp-gv-6nH"/>
+                <constraint firstAttribute="trailing" secondItem="fBa-dF-sgu" secondAttribute="trailing" id="MfX-8n-OXp"/>
+                <constraint firstItem="9gr-Ue-kEv" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="QHP-Qo-FcU"/>
+                <constraint firstItem="kxn-Ys-kQN" firstAttribute="leading" secondItem="9gr-Ue-kEv" secondAttribute="trailing" constant="3" id="YI2-Nj-H8b"/>
+                <constraint firstItem="qCw-b7-kJU" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Z9i-iY-HdG"/>
+                <constraint firstItem="Hck-gG-hGZ" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="aU0-vL-pw6"/>
+                <constraint firstItem="fBa-dF-sgu" firstAttribute="centerY" secondItem="kxn-Ys-kQN" secondAttribute="centerY" id="dJn-WP-zOY"/>
+                <constraint firstItem="Hck-gG-hGZ" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="krI-cf-WXI"/>
+                <constraint firstAttribute="bottom" secondItem="fBa-dF-sgu" secondAttribute="bottom" id="lUi-kA-ir9"/>
+                <constraint firstItem="fBa-dF-sgu" firstAttribute="leading" secondItem="kxn-Ys-kQN" secondAttribute="trailing" constant="3" id="lWh-xM-KER"/>
+                <constraint firstAttribute="trailing" secondItem="qCw-b7-kJU" secondAttribute="trailing" id="tfh-vm-mcx"/>
+                <constraint firstItem="fBa-dF-sgu" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="xr8-J5-6BP"/>
+            </constraints>
+            <connections>
+                <outlet property="lbNum" destination="kxn-Ys-kQN" id="clL-Cx-tlb"/>
+            </connections>
+            <point key="canvasLocation" x="28" y="27"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="dk-plus" width="28" height="20"/>
+        <image name="dk-reduce" width="28" height="20"/>
+    </resources>
+</document>

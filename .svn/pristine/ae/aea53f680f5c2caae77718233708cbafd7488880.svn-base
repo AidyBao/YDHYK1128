@@ -1,0 +1,70 @@
+//
+//  ZXTakePayWayViewController.swift
+//  YDHYK
+//
+//  Created by screson on 2017/10/26.
+//  Copyright © 2017年 screson. All rights reserved.
+//
+
+import UIKit
+
+/// 提货、支付方式
+class ZXTakePayWayViewController: ZXSTUIViewController {
+    override var preferredCartButtonHidden: Bool { return true }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.modalPresentationStyle = .custom
+        self.transitioningDelegate = self
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("Not init")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.clear
+    }
+    
+    @IBOutlet weak var btnSelfTake: UIButton!
+    
+    @IBOutlet weak var btnExpress: UIButton!
+    
+    @IBOutlet weak var btnCashPay: UIButton!
+    @IBOutlet weak var btnOnlinePay: UIButton!
+    
+    //@IBAction func payWayAction(_ sender: UIButton) {
+    //
+    //}
+    
+    @IBAction func takeGoodsAction(_ sender: UIButton) {
+        if sender == self.btnSelfTake {
+            
+        } else if sender == self.btnExpress {
+            
+        }
+    }
+    
+    
+    @IBAction func closeAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func commitAction(_ sender: Any) {
+//        delegate.
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+}
+
+extension ZXTakePayWayViewController:UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return ZXDimmingPresentationController.init(presentedViewController: presented, presenting: presenting)
+    }
+}

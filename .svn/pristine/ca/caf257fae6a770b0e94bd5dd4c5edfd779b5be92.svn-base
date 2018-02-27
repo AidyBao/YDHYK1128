@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZXSexAgeInputTableCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUg-vY-RYc">
+                        <rect key="frame" x="10" y="0.0" width="300" height="43.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z05-5N-Rof">
+                                <rect key="frame" x="149.5" y="5" width="1" height="33.5"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="0.5" id="Kg9-Az-sTM"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h_arrow_dark" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-Kx-73A">
+                                <rect key="frame" x="131.5" y="15.5" width="8" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="N7a-M3-huP"/>
+                                    <constraint firstAttribute="height" constant="14" id="VGD-31-W9E"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Ht9-nU-suT">
+                                <rect key="frame" x="0.0" y="13.5" width="31" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年龄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="oDR-yh-dmb">
+                                <rect key="frame" x="158.5" y="13.5" width="31" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mth-Xx-bhA">
+                                <rect key="frame" x="31" y="7.5" width="95.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="请选择">
+                                    <color key="titleColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sexAgeSelectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="QlN-dx-LMl"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRv-VV-376">
+                                <rect key="frame" x="189.5" y="13.5" width="110.5" height="17"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="hMc-HP-Y1R"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z05-5N-Rof" firstAttribute="top" secondItem="vUg-vY-RYc" secondAttribute="top" constant="5" id="1G7-q9-DZK"/>
+                            <constraint firstItem="oDR-yh-dmb" firstAttribute="leading" secondItem="z05-5N-Rof" secondAttribute="trailing" constant="8" id="A4N-eP-VN4"/>
+                            <constraint firstItem="z05-5N-Rof" firstAttribute="leading" secondItem="pNG-Kx-73A" secondAttribute="trailing" constant="10" id="CdX-N6-2WZ"/>
+                            <constraint firstItem="IRv-VV-376" firstAttribute="leading" secondItem="oDR-yh-dmb" secondAttribute="trailing" id="Egm-t8-ab5"/>
+                            <constraint firstItem="Mth-Xx-bhA" firstAttribute="centerY" secondItem="Ht9-nU-suT" secondAttribute="centerY" id="Jgs-wP-yuR"/>
+                            <constraint firstAttribute="bottom" secondItem="z05-5N-Rof" secondAttribute="bottom" constant="5" id="Nwl-Mb-Mzo"/>
+                            <constraint firstItem="Mth-Xx-bhA" firstAttribute="leading" secondItem="Ht9-nU-suT" secondAttribute="trailing" id="OBS-D7-uNI"/>
+                            <constraint firstItem="Ht9-nU-suT" firstAttribute="centerY" secondItem="vUg-vY-RYc" secondAttribute="centerY" id="VOo-s9-zyB"/>
+                            <constraint firstItem="oDR-yh-dmb" firstAttribute="centerY" secondItem="Ht9-nU-suT" secondAttribute="centerY" id="Vy1-3k-HH6"/>
+                            <constraint firstItem="pNG-Kx-73A" firstAttribute="centerY" secondItem="vUg-vY-RYc" secondAttribute="centerY" id="cdb-OD-H6o"/>
+                            <constraint firstItem="pNG-Kx-73A" firstAttribute="leading" secondItem="Mth-Xx-bhA" secondAttribute="trailing" constant="5" id="czP-Iz-fEV"/>
+                            <constraint firstAttribute="trailing" secondItem="IRv-VV-376" secondAttribute="trailing" id="d5d-BW-67S"/>
+                            <constraint firstItem="z05-5N-Rof" firstAttribute="centerX" secondItem="vUg-vY-RYc" secondAttribute="centerX" id="jch-z3-Qxh"/>
+                            <constraint firstItem="IRv-VV-376" firstAttribute="centerY" secondItem="oDR-yh-dmb" secondAttribute="centerY" id="jjg-jq-uQ8"/>
+                            <constraint firstItem="Ht9-nU-suT" firstAttribute="leading" secondItem="vUg-vY-RYc" secondAttribute="leading" id="qNq-Rj-Are"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vUg-vY-RYc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="4gA-2m-TMH"/>
+                    <constraint firstAttribute="trailing" secondItem="vUg-vY-RYc" secondAttribute="trailing" constant="10" id="QRc-xD-CRy"/>
+                    <constraint firstItem="vUg-vY-RYc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Sai-03-V18"/>
+                    <constraint firstAttribute="bottom" secondItem="vUg-vY-RYc" secondAttribute="bottom" id="zYt-sM-sdZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnSex" destination="Mth-Xx-bhA" id="hdF-vZ-FPK"/>
+                <outlet property="lbAgeTitle" destination="oDR-yh-dmb" id="JNm-Va-gLt"/>
+                <outlet property="lbSexTitle" destination="Ht9-nU-suT" id="cs6-iX-mZx"/>
+                <outlet property="txtAgeInput" destination="IRv-VV-376" id="RMX-Y4-RQO"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="h_arrow_dark" width="8" height="14"/>
+    </resources>
+</document>

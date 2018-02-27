@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="YDMedicineDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="藿香正气液" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NZ-Cn-DZY">
+                        <rect key="frame" x="10" y="5" width="230" height="19"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="饭前服用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93m-zT-hxe">
+                        <rect key="frame" x="10" y="29" width="290" height="25.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3片" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyy-sB-Wog">
+                        <rect key="frame" x="240" y="5" width="60" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="0bg-Bd-pB1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Jyy-sB-Wog" secondAttribute="trailing" constant="20" id="4mG-gy-T7I"/>
+                    <constraint firstItem="2NZ-Cn-DZY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="6TI-7m-ywq"/>
+                    <constraint firstItem="Jyy-sB-Wog" firstAttribute="centerY" secondItem="2NZ-Cn-DZY" secondAttribute="centerY" id="DXM-oR-uTZ"/>
+                    <constraint firstAttribute="trailing" secondItem="93m-zT-hxe" secondAttribute="trailing" constant="20" id="F0m-qI-vaz"/>
+                    <constraint firstItem="Jyy-sB-Wog" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="QUv-zL-NOS"/>
+                    <constraint firstItem="Jyy-sB-Wog" firstAttribute="leading" secondItem="2NZ-Cn-DZY" secondAttribute="trailing" id="W8U-6C-kag"/>
+                    <constraint firstItem="93m-zT-hxe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Xk8-xF-Hvp"/>
+                    <constraint firstItem="93m-zT-hxe" firstAttribute="top" secondItem="2NZ-Cn-DZY" secondAttribute="bottom" constant="5" id="dbT-Tk-PQc"/>
+                    <constraint firstAttribute="bottom" secondItem="93m-zT-hxe" secondAttribute="bottom" constant="5" id="hF2-dK-Wdc"/>
+                    <constraint firstItem="2NZ-Cn-DZY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rPW-gT-FVu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="noteLabel" destination="93m-zT-hxe" id="6Pa-MI-XBY"/>
+                <outlet property="quantityLabel" destination="Jyy-sB-Wog" id="cxy-Pg-1eb"/>
+                <outlet property="titleLabel" destination="2NZ-Cn-DZY" id="BUq-FY-5fU"/>
+                <outlet property="titleTopConstraint" destination="6TI-7m-ywq" id="7TI-18-j5A"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="60"/>
+        </tableViewCell>
+    </objects>
+</document>

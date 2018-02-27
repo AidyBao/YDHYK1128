@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YDLaunchRootViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjn-P0-LgJ">
+                    <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8xZ-7q-Bvv">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="8xZ-7q-Bvv" firstAttribute="leading" secondItem="Tjn-P0-LgJ" secondAttribute="leading" id="3QQ-1V-3j7"/>
+                        <constraint firstAttribute="bottom" secondItem="8xZ-7q-Bvv" secondAttribute="bottom" id="6RA-xA-D8p"/>
+                        <constraint firstAttribute="height" constant="100" id="6lH-JJ-SaN"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="KqX-Mf-10F"/>
+                        <constraint firstItem="8xZ-7q-Bvv" firstAttribute="top" secondItem="Tjn-P0-LgJ" secondAttribute="top" id="RDb-Fp-eM2"/>
+                        <constraint firstAttribute="trailing" secondItem="8xZ-7q-Bvv" secondAttribute="trailing" id="bZJ-pT-A47"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Tjn-P0-LgJ" secondAttribute="trailing" id="RaD-5d-x4D"/>
+                <constraint firstItem="Tjn-P0-LgJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ct5-O0-huB"/>
+                <constraint firstAttribute="bottom" secondItem="Tjn-P0-LgJ" secondAttribute="bottom" id="f9D-fO-tsE"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo" width="178" height="44"/>
+    </resources>
+</document>
